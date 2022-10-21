@@ -12,7 +12,7 @@ export class Game {
 	private wrongGuesses: number = 0
 
 	constructor(private secretWord: string) {
-		this.id = '123' //crypto.randomUUID()
+		this.id = crypto.randomUUID()
 	}
 
 	get status(): Status {

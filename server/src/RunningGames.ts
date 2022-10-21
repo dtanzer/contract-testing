@@ -14,6 +14,10 @@ export class RunningGames {
 	ids(): string[] {
 		return Object.keys(this.games)
 	}
+
+	get(id: string): Game | undefined {
+		return this.games[id]
+	}
 }
 
 export const allGames = new RunningGames()

@@ -25,6 +25,22 @@
           }
         }
       }
+    },
+    {
+      "description": "guessed letter a",
+      "providerState": "a game with id 1234-5678 is running",
+      "request": {
+        "method": "POST",
+        "path": "/games/1234-5678/guesses",
+        "body": {
+          "guess": "a"
+        }
+      },
+      "response": {
+        "status": 201,
+        "headers": {
+        }
+      }
     }
   ],
   "metadata": {

@@ -15,7 +15,8 @@ export interface GameStatus {
 export class GameApiService {
   public gameId: string | undefined
   private loadedSubject = new Subject<boolean>()
-  private baseURL = 'http://localhost:8000'
+  public baseURL = 'http://localhost:8000'
+  private headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
 
   constructor(private http: HttpClient) { }
 
@@ -23,8 +24,7 @@ export class GameApiService {
     this.baseURL = baseURL
     console.log('posting to', `${this.baseURL}/games/`)
 
-    const headers = new HttpHeaders().set('Content-Type', 'application/json; charset=utf-8');
-    this.http.post<{id: string}>(`${this.baseURL}/games/`, {}, { headers })
+    this.http.post<{id: string}>(`${this.baseURL}/games/`, {}, { headers: this.headers })
     .subscribe((response: {id: string}) => {
       console.log('received', response)
       this.gameId = response.id
@@ -37,7 +37,7 @@ export class GameApiService {
   }
 
   guess(key: string) {
-    return this.http.post(`${this.baseURL}/games/${this.gameId}/guesses`, { guess: key })
+    return this.http.post(`${this.baseURL}/games/${this.gameId}/guesses`, { guess: key }, { headers: this.headers })
   }
 
   get loaded(): Observable<boolean> {

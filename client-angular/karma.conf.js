@@ -51,7 +51,8 @@ module.exports = function (config) {
       spec: 2
     }],
     proxies: {
-      '/games': 'http://127.0.0.1:1234/games'
+      '/games/': 'http://127.0.0.1:1234/games/',
+      '/games/1234-5678/guesses': 'http://127.0.0.1:1234/games/1234-5678/guesses',
     }
   });
 };

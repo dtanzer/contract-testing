@@ -11,8 +11,8 @@ export class Game {
 	public readonly guesses: string[] = []
 	private wrongGuesses: number = 0
 
-	constructor(private secretWord: string) {
-		this.id = crypto.randomUUID()
+	constructor(private secretWord: string, id: string = crypto.randomUUID()) {
+		this.id = id
 	}
 
 	get status(): Status {

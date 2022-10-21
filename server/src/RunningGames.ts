@@ -5,8 +5,8 @@ export class RunningGames {
 	private games: { [key: string]: Game } = {}
 	private dictionary = new Dictionary()
 
-	new(): Game {
-		const game = new Game(this.dictionary.randomWord())
+	new(gameId?: string): Game {
+		const game = new Game(this.dictionary.randomWord(), gameId)
 		this.games[game.id] = game
 		return game
 	}

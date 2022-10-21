@@ -60,5 +60,26 @@ describe('PACT: angular client <-> game API', () => {
         })
       })
     })
+
+    describe('guessing', () => {
+      it('guesses letter a as first guess', (done) => {
+        provider!.addInteraction({
+          state: 'a game with id 1234-5678 is running',
+          uponReceiving: "guessed letter a",
+          withRequest: {
+            method: "POST",
+            path: "/games/1234-5678/guesses",
+            body: { guess: 'a' },
+          },
+          willRespondWith: {
+            status: 201,
+          },
+        }).then(_ => {
+          service!.gameId = '1234-5678'
+          service!.baseURL = 'http://localhost:1234'
+          service?.guess('a').subscribe(_ => done())
+        })
+      })
+    })
   })
 })

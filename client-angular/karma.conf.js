@@ -4,13 +4,14 @@
 module.exports = function (config) {
   config.set({
     basePath: '',
-    frameworks: ['jasmine', '@angular-devkit/build-angular'],
+    frameworks: ['jasmine', '@angular-devkit/build-angular', 'pact', ],
     plugins: [
       require('karma-jasmine'),
       require('karma-chrome-launcher'),
       require('karma-jasmine-html-reporter'),
       require('karma-coverage'),
-      require('@angular-devkit/build-angular/plugins/karma')
+      require('@angular-devkit/build-angular/plugins/karma'),
+      require('@pact-foundation/karma-pact'),
     ],
     client: {
       jasmine: {
@@ -39,6 +40,18 @@ module.exports = function (config) {
     autoWatch: true,
     browsers: ['Chrome'],
     singleRun: false,
-    restartOnFileChange: true
+    restartOnFileChange: true,
+    pact: [{
+      cors: true,
+      port: 1234,
+      consumer: "AngularGameClient",
+      provider: "GameServer",
+      dir: "pacts",
+      log: "pact.log",
+      spec: 2
+    }],
+    proxies: {
+      '/games': 'http://127.0.0.1:1234/games'
+    }
   });
 };

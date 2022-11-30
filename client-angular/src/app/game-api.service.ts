@@ -33,7 +33,7 @@ export class GameApiService {
   }
 
   status() {
-    return this.http.get<GameStatus>(`${this.baseURL}/games${this.gameId}`)
+    return this.http.get<GameStatus>(`${this.baseURL}/games/${this.gameId}`)
   }
 
   guess(key: string) {
